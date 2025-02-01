@@ -4,11 +4,12 @@
 </head>
 
 <script>
+    const ref = location.pathname.split('/').pop()
     /* https://docs.github.com/en/rest/commits/commits#get-a-commit
-       the `location.pathname` can be:
+       the `${ref}` can be:
        - the prefix(at least 4 characters) of a commit SHA-1 hash 
        - the tag name of a commit */
-    const url = `https://api.github.com/repos/liqwang/link/commits${location.pathname}`
+    const url = `https://api.github.com/repos/liqwang/link/commits/${ref}`
 
     fetch(url)
     .then(response => {
