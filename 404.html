@@ -1,0 +1,20 @@
+<!-- https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-custom-404-page-for-your-github-pages-site -->
+<head>
+    <title>Short URL Redirect...</title>
+</head>
+
+<script>
+    /* https://docs.github.com/en/rest/commits/commits#get-a-commit
+       the `location.pathname` can be:
+       - the prefix(at least 4 characters) of a commit SHA-1 hash 
+       - the tag name of a commit */
+    const url = `https://api.github.com/repos/liqwang/link/commits${location.pathname}`
+
+    fetch(url)
+    .then(response => {
+        if (!response.ok) throw new Error("Response is not 200 OK");
+        return response.json()
+    })
+    // redirect to the target URL stored in the commit message
+    .then(data => window.location.href = data?.commit?.message)
+</script>
